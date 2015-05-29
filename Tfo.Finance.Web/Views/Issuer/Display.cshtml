@@ -1,0 +1,64 @@
+﻿@model Tfo.Finance.Domain.Entities.Issuer
+
+@{
+    ViewBag.Title = "Stock and Option Information for " + @Model.Description;
+}
+
+<h2>@Model.Description</h2>
+
+<h3>Stock Information</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Symbol</td>
+            <td>Description</td>
+            <td>Bid</td>
+            <td>Ask</td>
+            <td>Last</td>
+            <td>Updated</td>
+        </tr>
+    </thead>
+    <tr>
+        @foreach (var stock in Model.Securities.OfType<Tfo.Finance.Domain.Entities.Stock>())
+        {
+            <td>@stock.Symbol</td>
+            <td>@stock.Description</td>
+            <td>@stock.Quote.Bid</td>
+            <td>@stock.Quote.Ask</td>
+            <td>@stock.Quote.Last</td>
+            <td>@stock.Quote.UpdateTime</td>
+        }
+    </tr>
+</table>
+
+<h3>Option Information</h3>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <td>Symbol</td>
+            <td>Description</td>
+            <td>Put/Call</td>
+            <td>Strike</td>
+            <td>Expiry</td>
+            <td>Bid</td>
+            <td>Ask</td>
+            <td>Last</td>
+            <td>Updated</td>
+        </tr>
+    </thead>
+    @foreach (var option in Model.Securities.OfType<Tfo.Finance.Domain.Entities.Option>())
+    {
+        <tr>
+            <td>@option.Symbol</td>
+            <td>@option.Description</td>
+            <td>@option.PutCall</td>
+            <td>@option.Strike</td>
+            <td>@option.Expiry.ToShortDateString()</td>
+            <td>@option.Quote.Bid</td>
+            <td>@option.Quote.Ask</td>
+            <td>@option.Quote.Last</td>
+            <td>@option.Quote.UpdateTime</td>
+        </tr>
+    }
+</table>
