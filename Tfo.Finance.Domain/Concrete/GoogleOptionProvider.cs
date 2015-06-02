@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using Tfo.Finance.Domain.Entities;
 
 namespace Tfo.Finance.Domain.Concrete
@@ -78,7 +76,7 @@ namespace Tfo.Finance.Domain.Concrete
                         .Select(e => new Option()
                         {
                             Symbol = e["s"].ToString(),
-                            Expiry = DateTime.ParseExact(e["expiry"].ToString(), "MMM dd, yyyy", null),
+                            Expiry = DateTime.ParseExact(e["expiry"].ToString(), "MMM d, yyyy", null),
                             Strike = e["strike"].Value<decimal>(),
                             PutCall = PutCall.Put,
                             Quote = new Quote()
@@ -93,7 +91,7 @@ namespace Tfo.Finance.Domain.Concrete
                         .Select(e => new Option()
                         {
                             Symbol = e["s"].ToString(),
-                            Expiry = DateTime.ParseExact(e["expiry"].ToString(), "MMM dd, yyyy", null),
+                            Expiry = DateTime.ParseExact(e["expiry"].ToString(), "MMM d, yyyy", null),
                             Strike = e["strike"].Value<decimal>(),
                             PutCall = PutCall.Call,
                             Quote = new Quote()
